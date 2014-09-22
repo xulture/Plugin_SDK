@@ -235,15 +235,15 @@ namespace PluginManager
             if ( bRet )
             {
                 // Unregister listeners
-                if ( gEnv && gEnv->pSystem && gEnv->pGame && gEnv->pGame->GetIGameFramework() )
-                {
-                    gEnv->pGame->GetIGameFramework()->UnregisterListener( this );
-                }
+                //if ( gEnv && gEnv->pSystem && gEnv->pGame && gEnv->pGame->GetIGameFramework() )
+                //{
+                //    gEnv->pGame->GetIGameFramework()->UnregisterListener( this );
+                //}
 
-                if ( gEnv && gEnv->pSystem && gEnv->pSystem->GetISystemEventDispatcher() )
-                {
-                    gEnv->pSystem->GetISystemEventDispatcher()->RemoveListener( this );
-                }
+                //if ( gEnv && gEnv->pSystem && gEnv->pSystem->GetISystemEventDispatcher() )
+                //{
+                //    gEnv->pSystem->GetISystemEventDispatcher()->RemoveListener( this );
+                //}
 
                 // Cleanup all plugins (special case only in manager...)
                 UnloadAllPlugins();
@@ -459,7 +459,7 @@ namespace PluginManager
 
     void CPluginManager::UnloadAllPlugins()
     {
-        LogAlways( "Unloading all plugins..." );
+        //LogAlways( "Unloading all plugins..." );
 
         // Keep only the plugin manager
         for ( int nMode = IM_Max; nMode >= IM_Min; --nMode )
@@ -486,7 +486,7 @@ namespace PluginManager
 
         PluginGarbageCollector();
 
-        LogAlways( "Unloaded all plugins!" );
+        //LogAlways( "Unloaded all plugins!" );
     };
 
     void CPluginManager::UnloadPlugin( const char* sPluginName )
@@ -502,7 +502,7 @@ namespace PluginManager
         {
             if ( pluginIter->second.m_pBase && !pluginIter->second.m_pBase->IsUnloading() )
             {
-                LogAlways( "Trying to unload: Name(%s)", sPluginName );
+                // LogAlways( "Trying to unload: Name(%s)", sPluginName );
 
                 // Let the plugin first clean itself up
                 pluginIter->second.m_pBase->Release();
@@ -515,13 +515,13 @@ namespace PluginManager
                 m_UnloadingPlugins[pluginIter->first] = pluginIter->second;
                 m_Plugins.erase( pluginIter );
 
-                LogAlways( "Marked for unload: Name(%s)", sPluginName );
+                // LogAlways( "Marked for unload: Name(%s)", sPluginName );
             }
         }
 
         else
         {
-            LogWarning( "Nothing to unload." );
+            // LogWarning( "Nothing to unload." );
         }
     }
 
@@ -571,7 +571,7 @@ namespace PluginManager
 
     void CPluginManager::PluginGarbageCollector()
     {
-        bool bQuit = !( gEnv && gEnv->pSystem && !gEnv->pSystem->IsQuitting() );
+        bool bQuit = true; // !(gEnv && gEnv->pSystem && !gEnv->pSystem->IsQuitting());
 
         // Something to do?
         if ( bQuit )

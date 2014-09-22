@@ -48,7 +48,7 @@ namespace PluginManager
                         if ( bWasInitialized )
                         {
                             // Unregister all types
-                            RegisterTypes( FT_All, true );
+                            // RegisterTypes( FT_All, true );
                         }
                     }
                 }
